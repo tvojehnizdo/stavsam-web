@@ -7,14 +7,15 @@
   <title>StavSám - Stavebnice domu svépomocí</title>
   <style>
     body { font-family: Arial, sans-serif; margin: 0; padding: 0; background: #f5f5f5; }
-    header { background: #004b7c; color: white; padding: 20px; text-align: center; }
+    header, footer { background: #004b7c; color: white; padding: 20px; text-align: center; }
     nav { background: #0066a1; padding: 10px; text-align: center; }
     nav a { color: white; margin: 0 15px; text-decoration: none; font-weight: bold; }
     .container { padding: 20px; max-width: 960px; margin: auto; background: white; }
     .card { background: #eef3f6; padding: 15px; margin: 15px 0; border-radius: 10px; }
     .pricing { font-size: 1.5em; color: #004b7c; font-weight: bold; }
-    footer { text-align: center; padding: 20px; background: #ddd; margin-top: 20px; }
-    input, select, button { padding: 10px; margin: 10px 0; width: 100%; max-width: 400px; }
+    form { margin-top: 20px; }
+    input, select, textarea, button { padding: 10px; margin: 10px 0; width: 100%; max-width: 400px; }
+    label { font-weight: bold; display: block; }
   </style>
 </head>
 <body>
@@ -49,32 +50,35 @@
 
     <section id="kalkulacka">
       <h2>📈 Kalkulačka ceny</h2>
-      <label for="plocha">Zastavěná plocha domu (m²):</label><br>
-      <input type="number" id="plocha" placeholder="Např. 85"><br>
-
-      <label for="varianta">Vyberte variantu dodávky:</label><br>
+      <label for="plocha">Zastavěná plocha domu (m²):</label>
+      <input type="number" id="plocha" placeholder="Např. 85">
+      <label for="varianta">Vyberte variantu dodávky:</label>
       <select id="varianta">
         <option value="10000">Basic</option>
         <option value="13000">Plus</option>
         <option value="16000">Extra</option>
-      </select><br>
-
+      </select>
       <button onclick="spocitej()">Spočítat cenu</button>
       <p id="vysledek" class="pricing"></p>
+      <button onclick="window.print()">📄 Stáhnout PDF nabídku</button>
     </section>
 
     <section id="kontakt">
-      <h2>📞 Kontakt</h2>
-      <p>E-mail: info@tvojehnizdo.cz</p>
-      <p>Telefon: 703 808 211</p>
-      <p>Web: www.tvojehnizdo.cz/stavsam</p>
+      <h2>📬 Kontaktní formulář</h2>
+      <form name="kontakt" method="POST" data-netlify="true">
+        <label for="jmeno">Jméno a příjmení:</label>
+        <input type="text" name="jmeno" required>
+        <label for="email">E-mail:</label>
+        <input type="email" name="email" required>
+        <label for="zprava">Zpráva:</label>
+        <textarea name="zprava" rows="5" required></textarea>
+        <button type="submit">Odeslat poptávku</button>
+      </form>
     </section>
   </div>
-
   <footer>
-    &copy; 2025 StavSám &ndash; stavebnice od Tvoje Hnízdo
+    &copy; 2025 StavSám – stavebnice od Tvoje Hnízdo
   </footer>
-
   <script>
     function spocitej() {
       const plocha = parseFloat(document.getElementById("plocha").value);
