@@ -2,94 +2,36 @@
 <!DOCTYPE html>
 <html lang="cs">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>StavSám - Stavebnice domu svépomocí</title>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>StavSám – Postav si dům svépomocí</title>
   <style>
-    body { font-family: Arial, sans-serif; margin: 0; padding: 0; background: #f5f5f5; }
-    header, footer { background: #004b7c; color: white; padding: 20px; text-align: center; }
-    nav { background: #0066a1; padding: 10px; text-align: center; }
-    nav a { color: white; margin: 0 15px; text-decoration: none; font-weight: bold; }
-    .container { padding: 20px; max-width: 960px; margin: auto; background: white; }
-    .card { background: #eef3f6; padding: 15px; margin: 15px 0; border-radius: 10px; }
-    .pricing { font-size: 1.5em; color: #004b7c; font-weight: bold; }
-    form { margin-top: 20px; }
-    input, select, textarea, button { padding: 10px; margin: 10px 0; width: 100%; max-width: 400px; }
-    label { font-weight: bold; display: block; }
+    body { font-family: Arial, sans-serif; margin: 0; padding: 0; background: #fdfaf6; }
+    .container { max-width: 960px; margin: 0 auto; padding: 20px; background: white; box-shadow: 0 0 10px rgba(0,0,0,0.1); }
+    .banner { width: 100%; margin-bottom: 20px; }
+    h1 { color: #004b8d; }
+    .desc { font-size: 1.1em; margin-bottom: 20px; }
+    iframe { width: 100%; height: 1500px; border: none; }
+    .lang-switch { text-align: right; margin-bottom: 10px; }
+    .lang-switch a { margin-left: 10px; text-decoration: none; font-weight: bold; color: #004b8d; }
   </style>
 </head>
 <body>
-  <header>
-    <h1>StavSám</h1>
-    <p>Postav si dům svépomocí z panelové stavebnice</p>
-  </header>
-  <nav>
-    <a href="#produkty">Produkty</a>
-    <a href="#kalkulacka">Kalkulačka</a>
-    <a href="#kontakt">Kontakt</a>
-  </nav>
   <div class="container">
-    <section id="produkty">
-      <h2>🛠 Varianty dodávky</h2>
-      <div class="card">
-        <h3>Basic</h3>
-        <p>Panelový skelet, spojovací materiál, návod</p>
-        <p class="pricing">od 10 000 Kč/m²</p>
-      </div>
-      <div class="card">
-        <h3>Plus</h3>
-        <p>Navíc střecha, podlaha, parobrzda</p>
-        <p class="pricing">od 13 000 Kč/m²</p>
-      </div>
-      <div class="card">
-        <h3>Extra</h3>
-        <p>+ okna, dveře, izolace, fasádní rošt</p>
-        <p class="pricing">od 16 000 Kč/m²</p>
-      </div>
-    </section>
-
-    <section id="kalkulacka">
-      <h2>📈 Kalkulačka ceny</h2>
-      <label for="plocha">Zastavěná plocha domu (m²):</label>
-      <input type="number" id="plocha" placeholder="Např. 85">
-      <label for="varianta">Vyberte variantu dodávky:</label>
-      <select id="varianta">
-        <option value="10000">Basic</option>
-        <option value="13000">Plus</option>
-        <option value="16000">Extra</option>
-      </select>
-      <button onclick="spocitej()">Spočítat cenu</button>
-      <p id="vysledek" class="pricing"></p>
-      <button onclick="window.print()">📄 Stáhnout PDF nabídku</button>
-    </section>
-
-    <section id="kontakt">
-      <h2>📬 Kontaktní formulář</h2>
-      <form name="kontakt" method="POST" data-netlify="true">
-        <label for="jmeno">Jméno a příjmení:</label>
-        <input type="text" name="jmeno" required>
-        <label for="email">E-mail:</label>
-        <input type="email" name="email" required>
-        <label for="zprava">Zpráva:</label>
-        <textarea name="zprava" rows="5" required></textarea>
-        <button type="submit">Odeslat poptávku</button>
-      </form>
-    </section>
+    <div class="lang-switch">
+      <a href="#">🇨🇿 Čeština</a>
+      <a href="#">🇬🇧 English</a>
+      <a href="#">🇩🇪 Deutsch</a>
+    </div>
+    <img src="banner-wide.png" alt="Banner StavSám" class="banner" />
+    <h1>Postav si dům svépomocí – Systém StavSám</h1>
+    <div class="desc">
+      S naším stavebnicovým systémem <strong>StavSám</strong> zvládnete stavbu domu i bez zkušeností.  
+      Stačí si vybrat variantu dodávky, zadat rozměry domu a ihned získáte cenovou nabídku.  
+      Profesionální výstup si můžete stáhnout jako <strong>PDF nabídku</strong> nebo odeslat nezávaznou poptávku.  
+      Zvládne to opravdu každý.
+    </div>
+    <iframe src="https://tvojehnizdo.github.io/stavsam-web/" loading="lazy"></iframe>
   </div>
-  <footer>
-    &copy; 2025 StavSám – stavebnice od Tvoje Hnízdo
-  </footer>
-  <script>
-    function spocitej() {
-      const plocha = parseFloat(document.getElementById("plocha").value);
-      const cenaZaM = parseFloat(document.getElementById("varianta").value);
-      if (isNaN(plocha) || plocha <= 0) {
-        document.getElementById("vysledek").innerText = "Zadejte platnou plochu domu.";
-        return;
-      }
-      const celkovaCena = plocha * cenaZaM;
-      document.getElementById("vysledek").innerText = `Celková cena: ${celkovaCena.toLocaleString()} Kč`; 
-    }
-  </script>
 </body>
 </html>
